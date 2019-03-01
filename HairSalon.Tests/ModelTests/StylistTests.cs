@@ -20,6 +20,19 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
+    public void StylistConstructor_CreatesInstanceOfStylist_Stylist()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      int id = 1;
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles, id);
+      Assert.AreEqual(typeof(Stylist), newStylist.GetType());
+    }
+
+    [TestMethod]
     public void GetId_ReturnsId_Int()
     {
       string name = "Marta";
