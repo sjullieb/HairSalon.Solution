@@ -11,9 +11,9 @@ namespace HairSalon.Models
     private string Email;
     private string PhoneNumber;
     private string Schedule;
-    private string HaricutStyles;
+    private string HaircutStyles;
 
-    public Stylist (string name, string email, string phoneNumber, string scheudle, string haricutStyles, int id = 0)
+    public Stylist (string name, string email, string phoneNumber, string schedule, string haricutStyles, int id = 0)
     {
       Id = id;
       Name = name;
@@ -21,6 +21,20 @@ namespace HairSalon.Models
       PhoneNumber = phoneNumber;
       Schedule = schedule;
       HaircutStyles = haricutStyles;
+    }
+
+    public static void ClearAll()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists;";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if(conn!=null)
+      {
+        conn.Dispose();
+      }
     }
   }
 }
