@@ -117,5 +117,89 @@ namespace HairSalon.Tests
       Assert.AreEqual(haircutStyles, result);
     }
 
+    // [TestMethod]
+    // public void GetStylists_ReturnsEmptyClientsList_ItemList()
+    // {
+    //   //Arrange
+    //   string name = "Work";
+    //   Category newCategory = new Category(name);
+    //   List<Item> newList = new List<Item> { };
+    //
+    //   //Act
+    //   List<Item> result = newCategory.GetClients();
+    //
+    //   //Assert
+    //   CollectionAssert.AreEqual(newList, result);
+    // }
+
+    [TestMethod]
+    public void GetAll_StylistEmptyAtFirst_List()
+    {
+      int result = Stylist.GetAll().Count;
+      Assert.AreEqual(0, result);
+    }
+
+    [TestMethod]
+    public void Equals_ReturnsTrueIfStylistsAreTheSame_True()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist firstStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      Stylist secondStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      Assert.AreEqual(firstStylist, secondStylist);
+    }
+
+    [TestMethod]
+    public void Save_SavesStylistToDatabase_StylistList()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      newStylist.Save();
+
+      List<Stylist> result = Stylist.GetAll();
+      List<Stylist> testList = new List<Stylist>{newStylist};
+
+      CollectionAssert.AreEqual(testList, result);
+    }
+
+    [TestMethod]
+    public void Save_DatabaseAssignsIdToStylist_Id()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      newStylist.Save();
+
+      Stylist savedStylist = Stylist.GetAll()[0];
+
+      int result = savedStylist.GetId();
+      int testId = newStylist.GetId();
+
+      Assert.AreEqual(testId, result);
+    }
+
+    [TestMethod]
+    public void Find_ReturnsStylistInDatabase_Stylist()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist testStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      testStylist.Save();
+      Stylist foundStylist = Stylist.Find(testStylist.GetId());
+      Assert.AreEqual(testStylist, foundStylist);
+    }
   }
 }

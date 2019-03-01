@@ -94,6 +94,7 @@ namespace HairSalon.Models
       cmd.Parameters.Add(prmHaircutStyles);
 
       cmd.ExecuteNonQuery();
+      Id = (int) cmd.LastInsertedId;
 
       conn.Close();
       if(conn!=null)
@@ -215,7 +216,13 @@ namespace HairSalon.Models
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        Stylist newStylist = new Stylist(rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetString(4), rdr.GetString(4), rdr.GetInt32(0));
+        string name = rdr.GetString(1);
+        string email = rdr.GetString(2);
+        string phoneNumber = rdr.GetString(3);
+        string schedule = rdr.GetString(4);
+        string haricutStyles = rdr.GetString(5);
+        int id = rdr.GetInt32(0);
+        Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haricutStyles, id);
         allStylists.Add(newStylist);
       }
       conn.Close();
