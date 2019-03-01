@@ -71,7 +71,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO stylists (name, email, schedule, haircut_styles) VALUES (@name, @email, @schedule, @haircut_styles);";
+      cmd.CommandText = @"INSERT INTO stylists (name, email, phone_number, schedule, haircut_styles) VALUES (@name, @email, @phone_number, @schedule, @haircut_styles);";
 
       MySqlParameter prmName = new MySqlParameter();
       prmName.ParameterName = "@name";
@@ -82,6 +82,11 @@ namespace HairSalon.Models
       prmEmail.ParameterName = "@email";
       prmEmail.Value = Email;
       cmd.Parameters.Add(prmEmail);
+
+      MySqlParameter prmPhoneNumber = new MySqlParameter();
+      prmPhoneNumber.ParameterName = "@phone_number";
+      prmPhoneNumber.Value = PhoneNumber;
+      cmd.Parameters.Add(prmPhoneNumber);
 
       MySqlParameter prmSchedule = new MySqlParameter();
       prmSchedule.ParameterName = "@schedule";
