@@ -22,6 +22,35 @@ namespace HairSalon.Models
       Schedule = schedule;
       HaircutStyles = haricutStyles;
     }
+    public int GetId()
+    {
+      return Id;
+    }
+
+    public string GetName()
+    {
+      return Name;
+    }
+
+    public string GetPhoneNumber()
+    {
+      return PhoneNumber;
+    }
+
+    public string GetEmail()
+    {
+      return Email;
+    }
+
+    public string GetSchedule()
+    {
+      return Schedule;
+    }
+
+    public string GetHaircutStyles()
+    {
+      return HaircutStyles;
+    }
 
     public static void ClearAll()
     {

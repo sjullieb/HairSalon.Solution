@@ -21,6 +21,31 @@ namespace HairSalon.Models
       StylistId = stylistId;
     }
 
+    public int GetId()
+    {
+      return Id;
+    }
+
+    public string GetName()
+    {
+      return Name;
+    }
+
+    public string GetPhoneNumber()
+    {
+      return PhoneNumber;
+    }
+
+    public string GetEmail()
+    {
+      return Email;
+    }
+
+    public int GetStylistId()
+    {
+      return StylistId;
+    }
+
     public static void ClearAll()
     {
       MySqlConnection conn = DB.Connection();
