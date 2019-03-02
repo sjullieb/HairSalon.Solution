@@ -1,9 +1,9 @@
 @using HairSalon.Models;
 
 <h1>Edit Stylist</h1>
-<form action="/cuisines/@Model.GetId()" method="post">
+<form action="/stylists/@Model.GetId()" method="post">
   <label for='name'>Name</label>
-  <input id='name' name='name' type='text' value=@model.GetName()>
+  <input id='name' name='name' type='text' value=@Model.GetName()>
   <label for='email'>Email</label>
   <input id='email' name='email' type='text' value=@Model.GetEmail()>
   <label for='phoneNumber'>Phone number</label>
@@ -12,7 +12,7 @@
   <input id='schedule' name='schedule' type='text' value=@Model.GetSchedule()>
   <label for='haircutStyles'>Haircut styles</label>
   <input id='haircutStyles' name='haircutStyles' type='text' value=@Model.GetHaircutStyles()>
-  <button type="submit">Submit</button>
+  <button type="submit">Save</button>
 </form>
 
-<a href='/stylists'>Go back to cuisines</a>
+<a href='/stylists'>Go back to stylists list</a>

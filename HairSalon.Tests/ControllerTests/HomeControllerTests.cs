@@ -16,6 +16,7 @@ namespace HairSalon.Tests
         ActionResult indexView = controller.Index();
         Assert.IsInstanceOfType(indexView, typeof(ViewResult));
       }
+
       // [TestMethod]
       // public void Index_HasCorrectModelType_CdList()
       // {
@@ -24,6 +25,7 @@ namespace HairSalon.Tests
       //   var result = indexView.ViewData.Model;
       //   Assert.IsInstanceOfType(result, typeof(List<Cd>));
       // }
+
 
     }
 }
