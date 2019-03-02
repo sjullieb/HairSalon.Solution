@@ -56,7 +56,9 @@ namespace HairSalon.Controllers
     [HttpPost("/stylists/{id}/delete")]
     public ActionResult Delete(int id)
     {
-      Stylist.Find(id).Delete();
+      Stylist currentStylist = Stylist.Find(id);
+      currentStylist.DeleteAllClients();
+      currentStylist.Delete();
       return RedirectToAction("Index");
     }
 

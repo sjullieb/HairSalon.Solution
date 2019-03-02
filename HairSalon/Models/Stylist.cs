@@ -108,7 +108,7 @@ namespace HairSalon.Models
       }
     }
 
-    public void Edit(string newName, string newEmail, string newSchedule, string newPhoneNumber, string newHaircutStyles)
+    public void Edit(string newName, string newEmail, string newPhoneNumber, string newSchedule, string newHaircutStyles)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
@@ -255,6 +255,26 @@ namespace HairSalon.Models
         conn.Dispose();
       }
       return allStylists;
+    }
+
+    public void DeleteAllClients()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM clients WHERE stylist_id=@id;";
+
+      MySqlParameter prmId = new MySqlParameter();
+      prmId.ParameterName = "@id";
+      prmId.Value = Id;
+      cmd.Parameters.Add(prmId);
+
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn!=null)
+      {
+        conn.Dispose();
+      }
     }
 
     public List<Client> GetAllClients()

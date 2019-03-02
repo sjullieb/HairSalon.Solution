@@ -1,20 +1,36 @@
 @using HairSalon.Models;
 
 <h1>@Model["stylist"].GetName()</h1>
+
+<p>Email: @Model["stylist"].GetEmail()</p>
+<p>Phone number: @Model["stylist"].GetPhoneNumber()</p>
+<p>Schedule: @Model["stylist"].GetSchedule()</p>
+<p>Haircut styles: @Model["stylist"].GetHaircutStyles()</p>
+
 @if(Model["clients"].Count == 0)
 {
   <p>No client for this stylist.</p>
 }
 @if(Model["clients"].Count != 0)
 {
+  <ul>
   @foreach(Client client in Model["clients"])
   {
-    <p><a href="/stylists/@Model["stylist"].GetId()/clients/@client.GetId()">@client.GetName()</a></p>
+    <li><a href="/stylists/@Model["stylist"].GetId()/clients/@client.GetId()">@client.GetName()</a></li>
   }
+  </ul>
 }
-<p><a href="/stylists/@Model["stylist"].GetId()/clients/new">Add client</a><p>
-<p><a href="/stylists/@Model["stylist"].GetId()/edit">Edit stylist</a></p>
-<p><a href="/stylists">Go back to Stylists list</a></p>
+
+<form action="/stylists/@Model["stylist"].GetId()/edit">
+  <button>Edit</button>
+</form>
+
 <form action='/stylists/@Model["stylist"].GetId()/delete' method="post">
   <button type='submit'>Delete</button>
 </form>
+
+<form action="/stylists/@Model["stylist"].GetId()/clients/new">
+  <button>Add new client</button>
+</form>
+
+<p><a href="/stylists">Go back to Stylists list</a></p>

@@ -199,12 +199,12 @@ namespace HairSalon.Tests
       Stylist testStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
       testStylist.Save();
       Stylist foundStylist = Stylist.Find(testStylist.GetId());
-      
+
       Assert.AreEqual(testStylist, foundStylist);
     }
 
     [TestMethod]
-    public void Delete_ReturnsEmptyStylistsDatabase_EmptyList()
+    public void DeleteAllClients_ReturnsEmptyClientsDatabase_EmptyClientsList()
     {
       string name = "Marta";
       string email = "marta@gmail.com";
@@ -213,6 +213,51 @@ namespace HairSalon.Tests
       string haircutStyles = "Men Women Kids";
       Stylist testStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
       testStylist.Save();
+      int stylistId = testStylist.GetId();
+
+      string client1name = "Sunny";
+      string client1email = "sunny@gmail.com";
+      string client1phoneNumber = "(425)987-6543";
+      Client testClient1 = new Client(client1name, client1email, client1phoneNumber, stylistId);
+      testClient1.Save();
+
+      string client2name = "Mike";
+      string client2email = "mike@gmail.com";
+      string client2phoneNumber = "(425)987-4356";
+      Client testClient2 = new Client(client2name, client2email, client2phoneNumber, stylistId);
+      testClient2.Save();
+
+      testStylist.DeleteAllClients();
+
+      List<Client> newList = new List<Client>{};
+      List<Client> fromDatabaseList = Client.GetAll();
+
+      CollectionAssert.AreEqual(newList, fromDatabaseList);
+    }
+
+    [TestMethod]
+    public void Delete_ReturnsEmptyStylistsDatabase_EmptyStylistList()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist testStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      testStylist.Save();
+
+      string client1name = "Sunny";
+      string client1email = "sunny@gmail.com";
+      string client1phoneNumber = "(425)987-6543";
+      Client testClient1 = new Client(client1name, client1email, client1phoneNumber, testStylist.GetId());
+      testClient1.Save();
+
+      string client2name = "Mike";
+      string client2email = "mike@gmail.com";
+      string client2phoneNumber = "(425)987-4356";
+      Client testClient2 = new Client(client2name, client2email, client2phoneNumber, testStylist.GetId());
+      testClient2.Save();
+
       testStylist.Delete();
 
       List<Stylist> newList = new List<Stylist>{};

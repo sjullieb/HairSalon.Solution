@@ -27,7 +27,7 @@ namespace HairSalon.Controllers
     }
 
     [HttpGet("/stylists/{stylistId}/clients/{id}/edit")]
-    public ActionResult Edit(int id, int stylistId)
+    public ActionResult Edit(int stylistId, int id)
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
       Stylist searchedStylist = Stylist.Find(stylistId);
@@ -47,6 +47,6 @@ namespace HairSalon.Controllers
       model.Add("stylist", searchedStylist);
       model.Add("client", searchedClient);
       return View("Show", model);
-    }    
+    }
   }
 }
