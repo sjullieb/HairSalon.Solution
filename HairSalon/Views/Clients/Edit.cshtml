@@ -1,0 +1,13 @@
+@using HairSalon.Models;
+
+<h1>Edit Client</h1>
+<form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()" method="post">
+  <label for="name">Name</label>
+  <input id="name" name="name" type="text" value="@Model["client"].GetName()">
+  <label for="email">Email</label>
+  <input id="email" name="email" type="text" value="@Model["client"].GetEmail()">
+  <label for="phoneNumber">Email</label>
+  <input id="phoneNumber" name="phoneNumber" type="text" value="@Model["client"].GetPhoneNumber()">
+
+  <button type="submit">Submit</button>
+</form>

@@ -123,9 +123,7 @@ namespace HairSalon.Tests
       int stylistId = 1;
       Client testClient = new Client(name, email, phoneNumber, stylistId);
       testClient.Save();
-      //Console.WriteLine(testClient.GetId().ToString());
       Client foundClient = Client.Find(testClient.GetId());
-      //Console.WriteLine(foundClient.GetId().ToString());
       Assert.AreEqual(testClient, foundClient);
     }
 
@@ -166,7 +164,5 @@ namespace HairSalon.Tests
 
       Assert.AreEqual(testClient, editedClient);
     }
-
-
   }
 }

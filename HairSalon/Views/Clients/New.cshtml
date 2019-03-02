@@ -1,0 +1,15 @@
+@using HairSalon.Models
+
+<h1>New Client for @Model.GetName()</h1>
+<form action="/stylists/@Model.GetId()/clients" method="post">
+  <input id="stylist_id" name="stylist_id" type="hidden" value="@Model.GetId()">
+  <label for="name">Name</label>
+  <input id="name" name="name" type="text" required>
+  <label for="email">Email</label>
+  <input id="email" name="email" type="text" required>
+  <label for='phoneNumber'>Phone number</label>
+  <input id='phoneNumber' name='phoneNumber' type='text' required>
+  <button type="submit">Add</button>
+</form>
+
+<a href="/stylists/@Model.GetId()">Back to List of Stylists</a>
