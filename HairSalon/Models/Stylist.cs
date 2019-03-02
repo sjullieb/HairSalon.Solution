@@ -108,32 +108,37 @@ namespace HairSalon.Models
       }
     }
 
-    public void Edit(string newType)
+    public void Edit(string newName, string newEmail, string newSchedule, string newPhoneNumber, string newHaircutStyles)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"UPDATE stylists SET name=@name, email=@email, schedule=@schedule, haircut_styles=@haircut_styles WHERE id=@id;";
+      cmd.CommandText = @"UPDATE stylists SET name=@name, email=@email, schedule=@schedule, phone_number=@phone_number, haircut_styles=@haircut_styles WHERE id=@id;";
 
       MySqlParameter prmName = new MySqlParameter();
       prmName.ParameterName = "@name";
-      prmName.Value = Name;
+      prmName.Value = newName;
       cmd.Parameters.Add(prmName);
 
       MySqlParameter prmEmail = new MySqlParameter();
       prmEmail.ParameterName = "@email";
-      prmEmail.Value = Email;
+      prmEmail.Value = newEmail;
       cmd.Parameters.Add(prmEmail);
 
       MySqlParameter prmSchedule = new MySqlParameter();
       prmSchedule.ParameterName = "@schedule";
-      prmSchedule.Value = Schedule;
+      prmSchedule.Value = newSchedule;
       cmd.Parameters.Add(prmSchedule);
 
       MySqlParameter prmHaircutStyles = new MySqlParameter();
       prmHaircutStyles.ParameterName = "@haircut_styles";
-      prmHaircutStyles.Value = HaircutStyles;
+      prmHaircutStyles.Value = newHaircutStyles;
       cmd.Parameters.Add(prmHaircutStyles);
+
+      MySqlParameter prmPhoneNumber = new MySqlParameter();
+      prmPhoneNumber.ParameterName = "@phone_number";
+      prmPhoneNumber.Value = newPhoneNumber;
+      cmd.Parameters.Add(prmPhoneNumber);
 
       MySqlParameter prmId = new MySqlParameter();
       prmId.ParameterName = "@id";
@@ -182,7 +187,14 @@ namespace HairSalon.Models
 
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       rdr.Read();
-      Stylist newStylist = new Stylist(rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetString(4), rdr.GetString(4), id);
+
+      string name = rdr.GetString(1);
+      string email = rdr.GetString(2);
+      string phoneNumber = rdr.GetString(3);
+      string schedule = rdr.GetString(4);
+      string haricutStyles = rdr.GetString(5);
+
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haricutStyles, id);
 
       conn.Close();
       if(conn!=null)

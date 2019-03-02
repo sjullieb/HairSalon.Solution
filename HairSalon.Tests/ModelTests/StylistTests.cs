@@ -198,7 +198,10 @@ namespace HairSalon.Tests
       string haircutStyles = "Men Women Kids";
       Stylist testStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
       testStylist.Save();
+      // Console.WriteLine("{0} {1} {2} {3} {4} {5} ", testStylist.GetId(), testStylist.GetName(), testStylist.GetEmail(), testStylist.GetSchedule(), testStylist.GetPhoneNumber(), testStylist.GetHaircutStyles());
       Stylist foundStylist = Stylist.Find(testStylist.GetId());
+      // Console.WriteLine("{0} {1} {2} {3} {4} {5} ", foundStylist.GetId(), foundStylist.GetName(), foundStylist.GetEmail(), foundStylist.GetSchedule(), foundStylist.GetPhoneNumber(), foundStylist.GetHaircutStyles());
+
       Assert.AreEqual(testStylist, foundStylist);
     }
   }
