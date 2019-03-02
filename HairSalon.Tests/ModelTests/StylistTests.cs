@@ -204,5 +204,75 @@ namespace HairSalon.Tests
 
       Assert.AreEqual(testStylist, foundStylist);
     }
+
+    [TestMethod]
+    public void Delete_ReturnsEmptyStylistsDatabase_EmptyList()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist testStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      testStylist.Save();
+      testStylist.Delete();
+
+      List<Stylist> newList = new List<Stylist>{};
+      List<Stylist> fromDatabaseList = Stylist.GetAll();
+
+      CollectionAssert.AreEqual(newList, fromDatabaseList);
+    }
+
+    [TestMethod]
+    public void Edit_UpdatesStylistInDatabase_Client()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist testStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      testStylist.Save();
+
+      string newName = "Martina";
+      string newEmail = "martina@gmail.com";
+      string newPhoneNumber = "(425)111-1111";
+      string newSchedule = "M,W,F 9-5";
+      string newHaircutStyles = "Men Women";
+      testStylist.Edit(newName, newEmail, newPhoneNumber, newSchedule, newHaircutStyles);
+
+      Stylist editedStylist = Stylist.GetAll()[0];
+
+      Assert.AreEqual(testStylist, editedStylist);
+    }
+
+    [TestMethod]
+    public void GetItems_RetrievesAllItemsWithCategory_ItemList()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist testStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      testStylist.Save();
+
+      string client1name = "Sunny";
+      string client1email = "sunny@gmail.com";
+      string client1phoneNumber = "(425)987-6543";
+      Client testClient1 = new Client(client1name, client1email, client1phoneNumber, testStylist.GetId());
+      testClient1.Save();
+
+      string client2name = "Mike";
+      string client2email = "mike@gmail.com";
+      string client2phoneNumber = "(425)987-4356";
+      Client testClient2 = new Client(client2name, client2email, client2phoneNumber, testStylist.GetId());
+      testClient2.Save();
+
+      List<Client> testClientList = new List<Client> {testClient1, testClient2};
+      List<Client> resultClientList = testStylist.GetAllClients();
+
+      CollectionAssert.AreEqual(testClientList, resultClientList);
+    }
   }
 }

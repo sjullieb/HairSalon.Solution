@@ -169,6 +169,11 @@ namespace HairSalon.Models
       cmd.Parameters.Add(prmId);
 
       cmd.ExecuteNonQuery();
+      
+      Name = newName;
+      Email = newEmail;
+      PhoneNumber = newPhoneNumber;
+
       conn.Close();
       if(conn!=null)
       {

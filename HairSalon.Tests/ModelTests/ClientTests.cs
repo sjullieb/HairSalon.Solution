@@ -123,14 +123,14 @@ namespace HairSalon.Tests
       int stylistId = 1;
       Client testClient = new Client(name, email, phoneNumber, stylistId);
       testClient.Save();
-      Console.WriteLine(testClient.GetId().ToString());
+      //Console.WriteLine(testClient.GetId().ToString());
       Client foundClient = Client.Find(testClient.GetId());
-      Console.WriteLine(foundClient.GetId().ToString());
+      //Console.WriteLine(foundClient.GetId().ToString());
       Assert.AreEqual(testClient, foundClient);
     }
 
     [TestMethod]
-    public void Delete_ReturnsClientInDatabase_Client()
+    public void Delete_ReturnsEmptyClientsDatabase_EmptyList()
     {
       string name = "Marta";
       string email = "marta@gmail.com";
@@ -146,27 +146,26 @@ namespace HairSalon.Tests
       CollectionAssert.AreEqual(newList, fromDatabaseList);
     }
 
-    // [TestMethod]
-    // public void Edit_UpdatesClientInDatabase_Client()
-    // {
-    //   string name = "Marta";
-    //   string email = "marta@gmail.com";
-    //   string phoneNumber = "(425)123-4567";
-    //   int stylistId = 1;
-    //   Client testClient = new Client(name, email, phoneNumber, stylistId);
-    //   testClient.Save();
-    //
-    //   string newName = "Marta";
-    //   string email = "marta@gmail.com";
-    //   string phoneNumber = "(425)123-4567";
-    //   int stylistId = 1;
-    //   testClient.Edit(name, email, "(425)111-1111");
-    //
-    //   List<Client> newList = new List<Client>{};
-    //   List<Client> fromDatabaseList = Client.GetAll();
-    //
-    //   CollectionAssert.AreEqual(newList, fromDatabaseList);
-    // }
+    [TestMethod]
+    public void Edit_UpdatesClientInDatabase_Client()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      int stylistId = 1;
+      Client testClient = new Client(name, email, phoneNumber, stylistId);
+      testClient.Save();
+      int id = testClient.GetId();
+
+      string newName = "Martina";
+      string newEmail = "martina@gmail.com";
+      string newPhoneNumber = "(425)111-1111";
+      testClient.Edit(newName, newEmail, newPhoneNumber);
+
+      Client editedClient = Client.GetAll()[0];
+
+      Assert.AreEqual(testClient, editedClient);
+    }
 
 
   }

@@ -146,6 +146,13 @@ namespace HairSalon.Models
       cmd.Parameters.Add(prmId);
 
       cmd.ExecuteNonQuery();
+
+      Name = newName;
+      Email = newEmail;
+      PhoneNumber = newPhoneNumber;
+      Schedule = newSchedule;
+      HaircutStyles = newHaircutStyles;
+
       conn.Close();
       if(conn!=null)
       {
@@ -252,7 +259,33 @@ namespace HairSalon.Models
 
     public List<Client> GetAllClients()
     {
-      return new List<Client>{};
+      List<Client> allClientsForStylist = new List<Client>{};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id=@stylist_id;";
+      MySqlParameter prmId = new MySqlParameter();
+      prmId.ParameterName = "@stylist_id";
+      prmId.Value = Id;
+      cmd.Parameters.Add(prmId);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int id = rdr.GetInt32(0);
+        string name = rdr.GetString(2);
+        string email = rdr.GetString(3);
+        string phoneNumber = rdr.GetString(4);
+
+        Client newClient = new Client(name, email, phoneNumber, Id, id);
+        allClientsForStylist.Add(newClient);
+      }
+      conn.Close();
+      if(conn!=null)
+      {
+        conn.Dispose();
+      }
+      return allClientsForStylist;
     }
+
   }
 }
