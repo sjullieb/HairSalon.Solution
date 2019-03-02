@@ -24,23 +24,26 @@ _The program uses the following specifications:_
 
 Requirements Software:
 
-* Download .NET Core 1.1.4 SDK, .NET Core Runtime 1.1.2, .NET Core static files middleware 1.1.3 and install them.
-* Download Mono and install it.
+Download and install:
+* .NET Core 1.1.4 SDK, .NET Core Runtime 1.1.2, .NET Core static files middleware 1.1.3
+* Mono
+* MAMP
 
-1. Clone this repository: $ git clone repo name
-2. Change into the work directory: $ cd WordCounter.Solution
-3. To edit the project, open the project in your preferred text editor.
-4. To set up the server, use commands: $ dotnet restore $ dotnet build $ dotnet run
-5. To open web application, enter http://localhost:5000/ in any browser
-6. To run the tests, use these commands: $ cd WordCounter.Tests $ dotnet test
+Clone this repository: $ git clone repo name
+Change into the work directory: $ cd HairSalon.Solution
 
-CREATE DATABASE yulia_shidlovskaya;
-USE yulia_shidlovskaya;
+Export database into phpMyAdmin:
 
-CREATE TABLE stylists(id serial PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), phone_number VARCHAR(15), schedule VARCHAR(255),haircut_styles VARCHAR(255));
+* Start MAMP and click Open WebStart page in the MAMP window.
+* In the website you're taken to, select phpMyAdmin from the Tools dropdown.
+* Select the Import tab.
+* Note that it's important to make sure you're not importing to a database that already exists, so make sure that a database with the same name as the one you're importing isn't already present.
+* Select your yulia_shidlovskaya.sql file, and click Go.
 
-CREATE TABLE clients(id serial PRIMARY KEY, stylist_id INT, name VARCHAR(255), email VARCHAR(255), phone_number VARCHAR(15));
-
+* Open and edit the project in your preferred text editor.
+* Run commands: $ dotnet restore $ dotnet build $ dotnet run
+* To open web application, enter http://localhost:5000/ in any browser
+* To run the tests, use these commands: $ cd HairSalon.Tests $ dotnet test
 
 ## Known Bugs
 
@@ -56,6 +59,8 @@ _If you run into any issues or have questions, ideas or concerns. Please email m
 * _.NET Core_
 * _Mono_
 * _MSTest_
+* _MAMP_
+* _MySQL_
 
 ### License
 
