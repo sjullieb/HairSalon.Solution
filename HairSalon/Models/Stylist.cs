@@ -193,14 +193,21 @@ namespace HairSalon.Models
       cmd.Parameters.Add(prmId);
 
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      rdr.Read();
 
-      string name = rdr.GetString(1);
-      string email = rdr.GetString(2);
-      string phoneNumber = rdr.GetString(3);
-      string schedule = rdr.GetString(4);
-      string haricutStyles = rdr.GetString(5);
+      string name = "";
+      string email = "";
+      string phoneNumber = "";
+      string schedule = "";
+      string haricutStyles = "";
 
+      while(rdr.Read())
+      {
+        name = rdr.GetString(1);
+        email = rdr.GetString(2);
+        phoneNumber = rdr.GetString(3);
+        schedule = rdr.GetString(4);
+        haricutStyles = rdr.GetString(5);
+      }
       Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haricutStyles, id);
 
       conn.Close();

@@ -31,6 +31,7 @@ namespace HairSalon.Controllers
     [HttpGet("/stylists/{id}")]
     public ActionResult Show(int id)
     {
+      Console.WriteLine("{0}", id);
       Dictionary<string, object> model = new Dictionary<string, object>();
       Stylist searchedStylist = Stylist.Find(id);
       model["stylist"] = searchedStylist;
@@ -72,10 +73,13 @@ namespace HairSalon.Controllers
     }
 
     [HttpPost("/stylists/{stylistId}/clients/{id}/delete")]
-    public ActionResult Delete(int id, int stylistId)
+    public ActionResult Delete(int stylistId, int id)
     {
+      //Console.WriteLine("{0} {1}", stylistId, id);
       Client.Find(id).Delete();
-      return RedirectToAction("Show", stylistId);
+      //Console.WriteLine("{0} {1}", stylistId, id);
+      //id = stylistId;
+      return RedirectToAction("Show", new {id = stylistId});
     }
 
   }

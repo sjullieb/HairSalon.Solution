@@ -32,7 +32,7 @@ namespace HairSalon.Controllers
       Dictionary<string, object> model = new Dictionary<string, object>();
       Stylist searchedStylist = Stylist.Find(stylistId);
       Client searchedClient = Client.Find(id);
-      model.Add("stlyist", searchedStylist);
+      model.Add("stylist", searchedStylist);
       model.Add("client", searchedClient);
       return View(model);
     }

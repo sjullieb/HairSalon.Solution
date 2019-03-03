@@ -8,8 +8,11 @@
 <p>Email: @Model["client"].GetEmail()<p>
 <p>Phone number: @Model["client"].GetPhoneNumber()<p>
 
-<a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit'>Edit</a>
+<form action='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit'>
+  <button type="submit">Edit</button>
+</form>
+
 <form action='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/delete' method="post">
   <button type="submit">Delete</button>
 </form>
-<a href='/stylists/@Model["stylist"].GetId()/'>Back to Clients of @Model["stylist"].GetName()</a>
+<a href='/stylists/@Model["stylist"].GetId()/'>Back to @Model["stylist"].GetName()'s clients</a>
