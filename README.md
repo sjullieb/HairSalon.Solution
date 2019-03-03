@@ -39,6 +39,7 @@ Export database into phpMyAdmin:
 * Select the Import tab.
 * Note that it's important to make sure you're not importing to a database that already exists, so make sure that a database with the same name as the one you're importing isn't already present.
 * Select your yulia_shidlovskaya.sql file, and click Go.
+* Do the same for yulia_shidlovskaya_file.sql to restore test database.
 
 * Open and edit the project in your preferred text editor.
 * Run commands: $ dotnet restore $ dotnet build $ dotnet run
