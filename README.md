@@ -1,4 +1,4 @@
-# _Word Counter_
+# _Hair Salon_
 
 #### _A web application for a hair salon, Created 03/01/2019_
 
