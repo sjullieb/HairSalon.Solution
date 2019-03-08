@@ -72,6 +72,11 @@ namespace HairSalon.Models
       prmId.Value = Id;
       cmd.Parameters.Add(prmId);
 
+      MySqlParameter prmDescription = new MySqlParameter();
+      prmDescription.ParameterName = "@description";
+      prmDescription.Value = newDescription;
+      cmd.Parameters.Add(prmDescription);
+
       cmd.ExecuteNonQuery();
 
       Description = newDescription;
@@ -135,7 +140,7 @@ namespace HairSalon.Models
 
     public override bool Equals(System.Object otherSpecialty)
     {
-      if(!(otherStylist is Specialty))
+      if(!(otherSpecialty is Specialty))
       {
         return false;
       }
@@ -215,7 +220,7 @@ namespace HairSalon.Models
       }
     }
 
-    public List<Client> GetAllStylists()
+    public List<Stylist> GetAllStylists()
     {
       List<Stylist> allStylistsForSpecialty = new List<Stylist>{};
       MySqlConnection conn = DB.Connection();
@@ -232,7 +237,7 @@ namespace HairSalon.Models
       string phoneNumber = "";
       string schedule = "";
       string haricutStyles = "";
-
+      int stylistId = 0;
       while(rdr.Read())
       {
         name = rdr.GetString(1);
@@ -240,7 +245,8 @@ namespace HairSalon.Models
         phoneNumber = rdr.GetString(3);
         schedule = rdr.GetString(4);
         haricutStyles = rdr.GetString(5);
-        Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haricutStyles, id);
+        stylistId = rdr.GetInt32(0);
+        Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haricutStyles, stylistId);
         allStylistsForSpecialty.Add(newStylist);
       }
       conn.Close();

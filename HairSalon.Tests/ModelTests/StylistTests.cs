@@ -290,7 +290,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void GetItems_RetrievesAllItemsWithCategory_ItemList()
+    public void GetAllClients_RetrievesAllClientsForStylist_ClientsList()
     {
       string name = "Marta";
       string email = "marta@gmail.com";
