@@ -317,5 +317,47 @@ namespace HairSalon.Tests
 
       CollectionAssert.AreEqual(testClientList, resultClientList);
     }
+    [TestMethod]
+    public void AddSpecialty_AddStylistSpecialtyToDB_Specialty()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      newStylist.Save();
+
+      string description = "Kids";
+      Specialty newSpecialty = new Specialty(description);
+      newSpecialty.Save();
+
+      newStylist.AddSpecialty(newSpecialty.GetId());
+      Specialty testSpecialty = newStylist.GetAllStylistSpecialties()[0];
+
+      Assert.AreEqual(testSpecialty, newSpecialty);
+    }
+
+    [TestMethod]
+    public void GetStylistSpecialty_GetStylistSpecialtyFromDB_SpecialtyList()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      newStylist.Save();
+
+      string description = "Kids";
+      Specialty newSpecialty = new Specialty(description);
+      newSpecialty.Save();
+
+      newStylist.AddSpecialty(newSpecialty.GetId());
+      List<Specialty> testList = new List<Specialty>{newSpecialty};
+      List<Specialty> result = newStylist.GetAllStylistSpecialties();
+
+      CollectionAssert.AreEqual(testList, result);
+    }
   }
 }

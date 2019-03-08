@@ -29,7 +29,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM specialties; DELETE FROM stylists_specialites;";
+      cmd.CommandText = @"DELETE FROM specialties; DELETE FROM stylists_specialties;";
       cmd.ExecuteNonQuery();
       conn.Close();
       if(conn!=null)
@@ -220,7 +220,7 @@ namespace HairSalon.Models
       }
     }
 
-    public List<Stylist> GetAllStylists()
+    public List<Stylist> GetSpecialtyStylists()
     {
       List<Stylist> allStylistsForSpecialty = new List<Stylist>{};
       MySqlConnection conn = DB.Connection();

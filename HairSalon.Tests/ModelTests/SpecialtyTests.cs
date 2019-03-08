@@ -195,6 +195,48 @@ namespace HairSalon.Tests
 
       Assert.AreEqual(testSpecialty, editedSpecialty);
     }
+    [TestMethod]
+    public void AddStylist_AddStylistWithSpecialtyToDB_Stylist()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      newStylist.Save();
+
+      string description = "Kids";
+      Specialty newSpecialty = new Specialty(description);
+      newSpecialty.Save();
+
+      newSpecialty.AddStylist(newStylist.GetId());
+      Stylist testStylist = newSpecialty.GetSpecialtyStylists()[0];
+
+      Assert.AreEqual(testStylist, newStylist);
+    }
+
+    [TestMethod]
+    public void GetSpecialtyStylists_GetStylistsWithSpecialtyFromDB_StylistList()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      newStylist.Save();
+
+      string description = "Kids";
+      Specialty newSpecialty = new Specialty(description);
+      newSpecialty.Save();
+
+      newSpecialty.AddStylist(newStylist.GetId());
+      List<Stylist> testList = new List<Stylist>{newStylist};
+      List<Stylist> result = newSpecialty.GetSpecialtyStylists();
+
+      CollectionAssert.AreEqual(testList, result);
+    }
     //
     // [TestMethod]
     // public void GetItems_RetrievesAllItemsWithCategory_ItemList()
