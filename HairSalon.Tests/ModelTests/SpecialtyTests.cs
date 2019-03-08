@@ -195,6 +195,7 @@ namespace HairSalon.Tests
 
       Assert.AreEqual(testSpecialty, editedSpecialty);
     }
+    
     [TestMethod]
     public void AddStylist_AddStylistWithSpecialtyToDB_Stylist()
     {

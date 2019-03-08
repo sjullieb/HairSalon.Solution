@@ -169,7 +169,7 @@ namespace HairSalon.Models
       cmd.Parameters.Add(prmId);
 
       cmd.ExecuteNonQuery();
-      
+
       Name = newName;
       Email = newEmail;
       PhoneNumber = newPhoneNumber;
@@ -214,13 +214,18 @@ namespace HairSalon.Models
       cmd.Parameters.Add(prmId);
 
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      rdr.Read();
+      string name = "";
+      string email = "";
+      string phoneNumber = "";
+      int stylistId = 0;
 
-      string name = rdr.GetString(2);
-      string email = rdr.GetString(3);
-      string phoneNumber = rdr.GetString(4);
-      int stylistId = rdr.GetInt32(1);
-
+      while(rdr.Read())
+      {
+        name = rdr.GetString(2);
+        email = rdr.GetString(3);
+        phoneNumber = rdr.GetString(4);
+        stylistId = rdr.GetInt32(1);
+      }
       Client newClient = new Client(name, email, phoneNumber, stylistId, id);
 
       conn.Close();

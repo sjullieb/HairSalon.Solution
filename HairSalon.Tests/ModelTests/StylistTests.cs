@@ -317,6 +317,7 @@ namespace HairSalon.Tests
 
       CollectionAssert.AreEqual(testClientList, resultClientList);
     }
+
     [TestMethod]
     public void AddSpecialty_AddStylistSpecialtyToDB_Specialty()
     {
