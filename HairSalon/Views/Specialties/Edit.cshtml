@@ -1,10 +1,21 @@
 @using HairSalon.Models;
 
 <h1>Edit Specialty</h1>
-<form action="/specialties/@Model.GetId()" method="post">
+<form action="/specialties/@Model["specialty"].GetId()" method="post">
   <label for='description'>Description</label>
-  <input id='description' name='description' type='text' value=@Model.GetDescription()>
+  <input id='description' name='description' type='text' value=@Model["specialty"].GetDescription()>
   <button type="submit">Save</button>
+</form>
+
+<form action="/specialties/@Model["specialty"].GetId()/add_stylist/" method="post">
+  <label for="stylistId">Add this specialty to a stylist</label>
+  <select id="stylistId" name="stylistId">
+      @foreach(Stylist stylist in Model["potential_stylists"])
+      {
+          <option value="@stylist.GetId()">@stylist.GetName()</option>
+      }
+  </select>
+  <button>Add</button>
 </form>
 
 <a href='/specialties'>Go back to specialties list</a>

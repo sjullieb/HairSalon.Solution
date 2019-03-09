@@ -4,14 +4,14 @@
 
 @if(Model["stylists"].Count == 0)
 {
-  <p>No stylists for this specialty`.</p>
+  <p>No stylists for this specialty.</p>
 }
 @if(Model["stylists"].Count != 0)
 {
   <ul>
   @foreach(Stylist stylist in Model["stylists"])
   {
-    <li><a href="stylists/@stylist.GetId()">@stylist.GetName()</a></li>
+    <li><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a></li>
   }
   </ul>
 }
@@ -24,8 +24,4 @@
   <button type='submit'>Delete</button>
 </form>
 
-<form action="/stylists/@Model["stylist"].GetId()/clients/new">
-  <button>Add new client</button>
-</form>
-
-<p><a href="/stylists">Go back to Stylists list</a></p>
+<p><a href="/specialties">Go back to Specialties list</a></p>

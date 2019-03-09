@@ -31,7 +31,7 @@ namespace HairSalon.Controllers
     [HttpGet("/specialties/{id}")]
     public ActionResult Show(int id)
     {
-      Console.WriteLine("{0}", id);
+      //Console.WriteLine("{0}", id);
       Dictionary<string, object> model = new Dictionary<string, object>();
       Specialty searchedSpecialty = Specialty.Find(id);
       model["specialty"] = searchedSpecialty;
@@ -42,8 +42,11 @@ namespace HairSalon.Controllers
     [HttpGet("/specialties/{id}/edit")]
     public ActionResult Edit(int id)
     {
+      Dictionary<string, object> model = new Dictionary<string, object>();
       Specialty searchedSpecialty = Specialty.Find(id);
-      return View(searchedSpecialty);
+      model["specialty"] = searchedSpecialty;
+      model["potential_stylists"] = searchedSpecialty.GetPotentialStylists();
+      return View(model);
     }
 
     [HttpPost("/specialties/{id}")]
@@ -52,6 +55,14 @@ namespace HairSalon.Controllers
       Specialty searchedSpecialty = Specialty.Find(id);
       searchedSpecialty.Edit(description);
       return RedirectToAction("Show", id);
+    }
+
+    [HttpPost("/specialties/{id}/add_stylist")]
+    public ActionResult AddStylist(int id, int stylistId)
+    {
+      Specialty searchedSpecialty = Specialty.Find(id);
+      searchedSpecialty.AddStylist(stylistId);
+      return RedirectToAction("Show");
     }
 //----------------------------------
     // [HttpPost("/specialties/{id}/delete")]
