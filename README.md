@@ -46,6 +46,17 @@ Export database into phpMyAdmin:
 * To open web application, enter http://localhost:5000/ in any browser
 * To run the tests, use these commands: $ cd HairSalon.Tests $ dotnet test
 
+
+To recreate database In MySQL:
+
+> CREATE DATABASE yulia_shidlovskaya;
+> USE to_do;
+> CREATE TABLE clients (id serial PRIMARY KEY, stylist_id int,  name varchar(255), email varchar(255), phone_number varchar(15));
+> CREATE TABLE specialties(id serial PRIMARY KEY, description varchar(255));
+> CREATE TABLE stylists (id serial PRIMARY KEY, name varchar(255), email varchar(255), phone_number varchar(15), schedule varchar(255), haircut_styles varchar(255));
+> CREATE TABLE stylists_specialties (id serial PRIMARY KEY, stylist_id int, specialty_id int);
+
+
 ## Known Bugs
 
 _No known bugs_
