@@ -1,6 +1,6 @@
 @using HairSalon.Models;
 
-<h1>@Model["stylist"].GetName()</h1>
+<h1>Stylist @Model["stylist"].GetName()</h1>
 
 <p>Email: @Model["stylist"].GetEmail()</p>
 <p>Phone number: @Model["stylist"].GetPhoneNumber()</p>
@@ -13,10 +13,26 @@
 }
 @if(Model["clients"].Count != 0)
 {
+  <p>Clients:</p>
   <ul>
   @foreach(Client client in Model["clients"])
   {
     <li><a href="/stylists/@Model["stylist"].GetId()/clients/@client.GetId()">@client.GetName()</a></li>
+  }
+  </ul>
+}
+
+@if(Model["specialties"].Count == 0)
+{
+  <p>No specialties for this stylist.</p>
+}
+@if(Model["specialties"].Count != 0)
+{
+  <p>Specialties:</p>
+  <ul>
+  @foreach(Specialty specialty in Model["specialties"])
+  {
+    <li>@specialty.GetDescription()</li>
   }
   </ul>
 }
@@ -34,3 +50,4 @@
 </form>
 
 <p><a href="/stylists">Go back to Stylists list</a></p>
+<p><a href="/">Go back to home page</a></p>

@@ -1,18 +1,30 @@
 @using HairSalon.Models;
 
 <h1>Edit Stylist</h1>
-<form action="/stylists/@Model.GetId()" method="post">
+<form action="/stylists/@Model["stylist"].GetId()" method="post">
   <label for='name'>Name</label>
-  <input id='name' name='name' type='text' value=@Model.GetName()>
+  <input id='name' name='name' type='text' value=@Model["stylist"].GetName()>
   <label for='email'>Email</label>
-  <input id='email' name='email' type='text' value=@Model.GetEmail()>
+  <input id='email' name='email' type='text' value=@Model["stylist"].GetEmail()>
   <label for='phoneNumber'>Phone number</label>
-  <input id='phoneNumber' name='phoneNumber' type='text' maxlength='15' value=@Model.GetPhoneNumber()>
+  <input id='phoneNumber' name='phoneNumber' type='text' maxlength='15' value=@Model["stylist"].GetPhoneNumber()>
   <label for='schedule'>Schedule</label>
-  <input id='schedule' name='schedule' type='text' value=@Model.GetSchedule()>
+  <input id='schedule' name='schedule' type='text' value=@Model["stylist"].GetSchedule()>
   <label for='haircutStyles'>Haircut styles</label>
-  <input id='haircutStyles' name='haircutStyles' type='text' value=@Model.GetHaircutStyles()>
+  <input id='haircutStyles' name='haircutStyles' type='text' value=@Model["stylist"].GetHaircutStyles()>
   <button type="submit">Save</button>
 </form>
 
-<a href='/stylists'>Go back to stylists list</a>
+<form action="/stylists/@Model["stylist"].GetId()/add_specialty/" method="post">
+  <label for="specialtytId">Add this specialty to a stylist</label>
+  <select id="specialtyId" name="specialtyId">
+      @foreach(Specialty specialty in Model["potential_specialties"])
+      {
+          <option value="@specialty.GetId()">@specialty.GetDescription()</option>
+      }
+  </select>
+  <button>Add</button>
+</form>
+
+<p><a href='/stylists'>Go back to Stylists list</a></p>
+<p><a href="/">Go back to home page</a></p>

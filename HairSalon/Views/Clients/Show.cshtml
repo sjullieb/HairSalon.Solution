@@ -1,9 +1,7 @@
 @using HairSalon.Models;
 
-<h1>Client</h1>
-<h1>@Model["client"].GetName()</h1>
-<h2>Stylist</h2>
-<h2>@Model["stylist"].GetName()</h2>
+<h1>Client @Model["client"].GetName()</h1>
+<h2>Stylist @Model["stylist"].GetName()</h2>
 
 <p>Email: @Model["client"].GetEmail()<p>
 <p>Phone number: @Model["client"].GetPhoneNumber()<p>
@@ -15,4 +13,5 @@
 <form action='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/delete' method="post">
   <button type="submit">Delete</button>
 </form>
-<a href='/stylists/@Model["stylist"].GetId()/'>Back to @Model["stylist"].GetName()'s clients</a>
+<p><a href='/stylists/@Model["stylist"].GetId()/'>Back to @Model["stylist"].GetName()'s clients</a></p>
+<p><a href="/">Go back to home page</a></p>
