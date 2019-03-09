@@ -20,11 +20,15 @@ namespace HairSalon.Controllers
       return View(Specialty.GetAll());
     }
 
-    [HttpPost("/stylists/delete")]
-    public ActionResult DeleteAll()
+    [HttpGet("/stylists/{id}")]
+    public ActionResult Show(int id)
     {
-      Stylist.DeleteAll();
-      return RedirectToAction("Index");
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Stylist searchedStylist = Stylist.Find(id);
+      model["stylist"] = searchedStylist;
+      model["clients"] = searchedStylist.GetAllClients();
+      model["specialties"] = searchedStylist.GetAllStylistSpecialties();
+      return View(model);
     }
 
     [HttpPost("/stylists")]
@@ -34,18 +38,6 @@ namespace HairSalon.Controllers
       newStylist.Save();
       newStylist.AddSpecialty(specialtyId);
       return RedirectToAction("Index");
-    }
-
-    [HttpGet("/stylists/{id}")]
-    public ActionResult Show(int id)
-    {
-//      Console.WriteLine("{0}", id);
-      Dictionary<string, object> model = new Dictionary<string, object>();
-      Stylist searchedStylist = Stylist.Find(id);
-      model["stylist"] = searchedStylist;
-      model["clients"] = searchedStylist.GetAllClients();
-      model["specialties"] = searchedStylist.GetAllStylistSpecialties();
-      return View(model);
     }
 
     [HttpGet("/stylists/{id}/edit")]
@@ -88,10 +80,7 @@ namespace HairSalon.Controllers
     [HttpPost("/stylists/{stylistId}/clients/{id}/delete")]
     public ActionResult Delete(int stylistId, int id)
     {
-      //Console.WriteLine("{0} {1}", stylistId, id);
       Client.Find(id).Delete();
-      //Console.WriteLine("{0} {1}", stylistId, id);
-      //id = stylistId;
       return RedirectToAction("Show", new {id = stylistId});
     }
 
@@ -101,6 +90,13 @@ namespace HairSalon.Controllers
       Stylist searchedStylist = Stylist.Find(id);
       searchedStylist.AddSpecialty(specialtyId);
       return RedirectToAction("Show");
+    }
+
+    [HttpPost("/stylists/delete")]
+    public ActionResult DeleteAll()
+    {
+      Stylist.DeleteAll();
+      return RedirectToAction("Index");
     }
   }
 }

@@ -340,7 +340,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void GetStylistSpecialty_GetStylistSpecialtyFromDB_SpecialtyList()
+    public void GetAllStylistSpecialties_GetStylistSpecialtyToDB_SpecialtyList()
     {
       string name = "Marta";
       string email = "marta@gmail.com";
@@ -356,8 +356,45 @@ namespace HairSalon.Tests
 
       newStylist.AddSpecialty(newSpecialty.GetId());
       List<Specialty> testList = new List<Specialty>{newSpecialty};
-      List<Specialty> result = newStylist.GetAllStylistSpecialties();
+      List<Specialty> testSpecialty = newStylist.GetAllStylistSpecialties();
 
+      CollectionAssert.AreEqual(testList, testSpecialty);
+    }
+
+    [TestMethod]
+    public void GetPotentiaSpecialty_GetSpecialtyStylistDoesntHave_SpecialtyList()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      newStylist.Save();
+
+      string description = "Kids";
+      Specialty newSpecialty = new Specialty(description);
+      newSpecialty.Save();
+
+      List<Specialty> testList = new List<Specialty>{newSpecialty};
+      List<Specialty> result = newStylist.GetPotentialSpecialties();
+      CollectionAssert.AreEqual(testList, result);
+    }
+
+    [TestMethod]
+    public void DeleteAll_DeletesAllFromBatabase_EmptyList()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      newStylist.Save();
+
+      Stylist.DeleteAll();
+      List<Stylist> testList = new List<Stylist>{};
+      List<Stylist> result = Stylist.GetAll();
       CollectionAssert.AreEqual(testList, result);
     }
   }

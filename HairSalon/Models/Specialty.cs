@@ -175,26 +175,7 @@ namespace HairSalon.Models
       }
       return allSpecialties;
     }
-    //
-    // public void DeleteAllClients()
-    // {
-    //   MySqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"DELETE FROM clients WHERE stylist_id=@id;";
-    //
-    //   MySqlParameter prmId = new MySqlParameter();
-    //   prmId.ParameterName = "@id";
-    //   prmId.Value = Id;
-    //   cmd.Parameters.Add(prmId);
-    //
-    //   cmd.ExecuteNonQuery();
-    //   conn.Close();
-    //   if (conn!=null)
-    //   {
-    //     conn.Dispose();
-    //   }
-    // }
+
     public void AddStylist(int stylistId)
     {
       MySqlConnection conn = DB.Connection();

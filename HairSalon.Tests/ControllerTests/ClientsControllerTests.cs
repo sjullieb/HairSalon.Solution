@@ -16,6 +16,41 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
+    public void Index_ReturnsCorrectView_True()
+    {
+      ClientsController controller = new ClientsController();
+      ActionResult indexView = controller.Index();
+      Assert.IsInstanceOfType(indexView, typeof(ViewResult));
+    }
+
+    [TestMethod]
+    public void Index_HasCorrectModelType_ClientsList()
+    {
+      ClientsController controller = new ClientsController();
+      ViewResult indexView = controller.Index() as ViewResult;
+      var result = indexView.ViewData.Model;
+      Assert.IsInstanceOfType(result, typeof(List<Client>));
+    }
+
+    [TestMethod]
+    public void DeleteAll_ReturnsCorrectActionType_RedirectToActionResult()
+    {
+      ClientsController controller = new ClientsController();
+      IActionResult view = controller.DeleteAll();
+
+      Assert.IsInstanceOfType(view, typeof(RedirectToActionResult));
+    }
+
+    [TestMethod]
+    public void DeleteAll_RedirectsToCorrectAction_Index()
+    {
+      ClientsController controller = new ClientsController();
+      RedirectToActionResult actionResult = controller.DeleteAll() as RedirectToActionResult;
+      string result = actionResult.ActionName;
+      Assert.AreEqual(result, "Index");
+    }
+
+    [TestMethod]
     public void New_ReturnsCorrectView_True()
     {
       string name = "Marta";

@@ -16,7 +16,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void Index_ReturnsCorrect_View_True()
+    public void Index_ReturnsCorrectView_True()
     {
       StylistsController controller = new StylistsController();
       ActionResult indexView = controller.Index();
@@ -41,7 +41,16 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void Show_ReturnsCorrect_View_True()
+    public void New_HasCorrectModelType_SpecialtiesList()
+    {
+      StylistsController controller = new StylistsController();
+      ViewResult indexView = controller.New() as ViewResult;
+      var result = indexView.ViewData.Model;
+      Assert.IsInstanceOfType(result, typeof(List<Specialty>));
+    }
+
+    [TestMethod]
+    public void Show_ReturnsCorrectView_True()
     {
       string name = "Marta";
       string email = "marta@gmail.com";
@@ -76,7 +85,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void Edit_ReturnsCorrect_View_True()
+    public void Edit_ReturnsCorrectView_True()
     {
       string name = "Marta";
       string email = "marta@gmail.com";
@@ -93,7 +102,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void Edit_HasCorrectModelType_Stylist()
+    public void Edit_HasCorrectModelType_Dictionary()
     {
       string name = "Marta";
       string email = "marta@gmail.com";
@@ -107,7 +116,7 @@ namespace HairSalon.Tests
       StylistsController controller = new StylistsController();
       ViewResult indexView = controller.Edit(id) as ViewResult;
       var result = indexView.ViewData.Model;
-      Assert.IsInstanceOfType(result, typeof(Stylist));
+      Assert.IsInstanceOfType(result, typeof(Dictionary<string, object>));
     }
 
     [TestMethod]
@@ -119,8 +128,12 @@ namespace HairSalon.Tests
       string schedule = "M-F 9-5";
       string haircutStyles = "Men Women Kids";
 
+      Specialty newSpecialty = new Specialty("Kids");
+      newSpecialty.Save();
+
       StylistsController controller = new StylistsController();
-      IActionResult view = controller.Create(name, email, phoneNumber, schedule, haircutStyles);
+      IActionResult view = controller.Create(name, email, phoneNumber, schedule, haircutStyles, newSpecialty.GetId());
+
       Assert.IsInstanceOfType(view, typeof(RedirectToActionResult));
     }
 
@@ -133,8 +146,11 @@ namespace HairSalon.Tests
       string schedule = "M-F 9-5";
       string haircutStyles = "Men Women Kids";
 
+      Specialty newSpecialty = new Specialty("Kids");
+      newSpecialty.Save();
+
       StylistsController controller = new StylistsController();
-      RedirectToActionResult actionResult = controller.Create(name, email, phoneNumber, schedule, haircutStyles) as RedirectToActionResult;
+      RedirectToActionResult actionResult = controller.Create(name, email, phoneNumber, schedule, haircutStyles, newSpecialty.GetId()) as RedirectToActionResult;
       string result = actionResult.ActionName;
       Assert.AreEqual(result, "Index");
     }
@@ -302,6 +318,64 @@ namespace HairSalon.Tests
       RedirectToActionResult actionResult = controller.Delete(clientId, stylistId) as RedirectToActionResult;
       string result = actionResult.ActionName;
       Assert.AreEqual(result, "Show");
+    }
+
+    [TestMethod]
+    public void AddSpecialty_ReturnsCorrectActionType_RedirectToAction()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      newStylist.Save();
+      int stylistId = newStylist.GetId();
+
+      Specialty newSpecialty = new Specialty("Kids");
+      newSpecialty.Save();
+
+      StylistsController controller = new StylistsController();
+      IActionResult view = controller.AddSpecialty(stylistId, newSpecialty.GetId());
+      Assert.IsInstanceOfType(view, typeof(RedirectToActionResult));
+    }
+
+    [TestMethod]
+    public void AddSpecialty_RedirectsToCorrectAction_Show()
+    {
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      newStylist.Save();
+      int stylistId = newStylist.GetId();
+
+      Specialty newSpecialty = new Specialty("Kids");
+      newSpecialty.Save();
+
+      StylistsController controller = new StylistsController();
+      RedirectToActionResult actionResult = controller.AddSpecialty(stylistId, newSpecialty.GetId()) as RedirectToActionResult;
+      string result = actionResult.ActionName;
+      Assert.AreEqual(result, "Show");
+    }
+
+    [TestMethod]
+    public void DeleteAll_ReturnsCorrectActionType_RedirectToActionResult()
+    {
+      StylistsController controller = new StylistsController();
+      IActionResult view = controller.DeleteAll();
+      Assert.IsInstanceOfType(view, typeof(RedirectToActionResult));
+    }
+
+    [TestMethod]
+    public void DeleteAll_RedirectsToCorrectAction_Index()
+    {
+      StylistsController controller = new StylistsController();
+      RedirectToActionResult actionResult = controller.DeleteAll() as RedirectToActionResult;
+      string result = actionResult.ActionName;
+      Assert.AreEqual(result, "Index");
     }
   }
 }

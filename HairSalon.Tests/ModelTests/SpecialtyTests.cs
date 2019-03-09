@@ -103,7 +103,7 @@ namespace HairSalon.Tests
 
       int result = savedSpecialty.GetId();
       int testId = newSpecialty.GetId();
-      Console.WriteLine("{0} {1}", result, testId);
+
       Assert.AreEqual(testId, result);
     }
 
@@ -195,7 +195,7 @@ namespace HairSalon.Tests
 
       Assert.AreEqual(testSpecialty, editedSpecialty);
     }
-    
+
     [TestMethod]
     public void AddStylist_AddStylistWithSpecialtyToDB_Stylist()
     {
@@ -238,6 +238,28 @@ namespace HairSalon.Tests
 
       CollectionAssert.AreEqual(testList, result);
     }
+
+    [TestMethod]
+    public void GetPotentialStylists_ReturnStylistsWithoutThisSpecialty_StylistsList()
+    {
+      string description = "Kids";
+      Specialty newSpecialty = new Specialty(description);
+      newSpecialty.Save();
+
+      string name = "Marta";
+      string email = "marta@gmail.com";
+      string phoneNumber = "(425)123-4567";
+      string schedule = "M-F 9-5";
+      string haircutStyles = "Men Women Kids";
+      Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
+      newStylist.Save();
+
+      List<Stylist> testList = new List<Stylist>{newStylist};
+      List<Stylist> result = newSpecialty.GetPotentialStylists();
+
+      CollectionAssert.AreEqual(testList, result);
+    }
+
     //
     // [TestMethod]
     // public void GetItems_RetrievesAllItemsWithCategory_ItemList()
