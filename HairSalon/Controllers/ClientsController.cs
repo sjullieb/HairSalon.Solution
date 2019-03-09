@@ -8,6 +8,20 @@ namespace HairSalon.Controllers
 {
   public class ClientsController : Controller
   {
+
+    [HttpGet("/clients")]
+    public ActionResult Index()
+    {
+      return View(Client.GetAll());
+    }
+
+    [HttpPost("/clients/delete")]
+    public ActionResult DeleteAll()
+    {
+      Client.DeleteAll();
+      return RedirectToAction("Index");
+    }
+
     [HttpGet("/stylists/{id}/clients/new")]
     public ActionResult New(int id)
     {

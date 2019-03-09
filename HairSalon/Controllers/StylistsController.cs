@@ -20,6 +20,13 @@ namespace HairSalon.Controllers
       return View(Specialty.GetAll());
     }
 
+    [HttpPost("/stylists/delete")]
+    public ActionResult DeleteAll()
+    {
+      Stylist.DeleteAll();
+      return RedirectToAction("Index");
+    }
+
     [HttpPost("/stylists")]
     public ActionResult Create(string name, string email, string phoneNumber, string schedule, string haircutStyles, int specialtyId)
     {
