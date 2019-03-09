@@ -1,0 +1,31 @@
+@using HairSalon.Models;
+
+<h1>@Model["specialty"].GetDescription()</h1>
+
+@if(Model["stylists"].Count == 0)
+{
+  <p>No stylists for this specialty`.</p>
+}
+@if(Model["stylists"].Count != 0)
+{
+  <ul>
+  @foreach(Stylist stylist in Model["stylists"])
+  {
+    <li><a href="stylists/@stylist.GetId()">@stylist.GetName()</a></li>
+  }
+  </ul>
+}
+
+<form action="/specialties/@Model["specialty"].GetId()/edit">
+  <button>Edit</button>
+</form>
+
+<form action='/specialties/@Model["specialty"].GetId()/delete' method="post">
+  <button type='submit'>Delete</button>
+</form>
+
+<form action="/stylists/@Model["stylist"].GetId()/clients/new">
+  <button>Add new client</button>
+</form>
+
+<p><a href="/stylists">Go back to Stylists list</a></p>

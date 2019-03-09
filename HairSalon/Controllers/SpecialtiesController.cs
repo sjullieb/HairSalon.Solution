@@ -42,45 +42,45 @@ namespace HairSalon.Controllers
     [HttpGet("/specialties/{id}/edit")]
     public ActionResult Edit(int id)
     {
-      Stylist searchedSpecialty = Specialty.Find(id);
+      Specialty searchedSpecialty = Specialty.Find(id);
       return View(searchedSpecialty);
     }
 
     [HttpPost("/specialties/{id}")]
     public ActionResult Update(int id, string description)
     {
-      Stylist searchedSpecialty = Specialty.Find(id);
+      Specialty searchedSpecialty = Specialty.Find(id);
       searchedSpecialty.Edit(description);
       return RedirectToAction("Show", id);
     }
 //----------------------------------
-    [HttpPost("/specialties/{id}/delete")]
-    public ActionResult Delete(int id)
-    {
-      Stylist currentStylist = Stylist.Find(id);
-      currentStylist.DeleteAllClients();
-      currentStylist.Delete();
-      return RedirectToAction("Index");
-    }
-
-    [HttpPost("/specialties/{id}/clients")]
-    public ActionResult Create(int id, string name, string email, string phoneNumber)
-    {
-      Stylist searchedStylist = Stylist.Find(id);
-      Client newClient = new Client(name, email, phoneNumber, id);
-      newClient.Save();
-      return RedirectToAction("Show", id);
-    }
-
-    [HttpPost("/specialties/{stylistId}/clients/{id}/delete")]
-    public ActionResult Delete(int stylistId, int id)
-    {
-      //Console.WriteLine("{0} {1}", stylistId, id);
-      Client.Find(id).Delete();
-      //Console.WriteLine("{0} {1}", stylistId, id);
-      //id = stylistId;
-      return RedirectToAction("Show", new {id = stylistId});
-    }
+    // [HttpPost("/specialties/{id}/delete")]
+    // public ActionResult Delete(int id)
+    // {
+    //   Stylist currentSpecialty = Specialty.Find(id);
+    //   //currentStylist.DeleteAllClients();
+    //   currentSpecialty.Delete();
+    //   return RedirectToAction("Index");
+    // }
+    //
+    // [HttpPost("/specialties/{id}/clients")]
+    // public ActionResult Create(int id, string name, string email, string phoneNumber)
+    // {
+    //   Stylist searchedStylist = Stylist.Find(id);
+    //   Client newClient = new Client(name, email, phoneNumber, id);
+    //   newClient.Save();
+    //   return RedirectToAction("Show", id);
+    // }
+    //
+    // [HttpPost("/specialties/{stylistId}/clients/{id}/delete")]
+    // public ActionResult Delete(int stylistId, int id)
+    // {
+    //   //Console.WriteLine("{0} {1}", stylistId, id);
+    //   Client.Find(id).Delete();
+    //   //Console.WriteLine("{0} {1}", stylistId, id);
+    //   //id = stylistId;
+    //   return RedirectToAction("Show", new {id = stylistId});
+    // }
 
   }
 }

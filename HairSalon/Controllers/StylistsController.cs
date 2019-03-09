@@ -17,14 +17,15 @@ namespace HairSalon.Controllers
     [HttpGet("/stylists/new")]
     public ActionResult New()
     {
-      return View();
+      return View(Specialty.GetAll());
     }
 
     [HttpPost("/stylists")]
-    public ActionResult Create(string name, string email, string phoneNumber, string schedule, string haircutStyles)
+    public ActionResult Create(string name, string email, string phoneNumber, string schedule, string haircutStyles, int specialtyId)
     {
       Stylist newStylist = new Stylist(name, email, phoneNumber, schedule, haircutStyles);
       newStylist.Save();
+      newStylist.AddSpecialty(specialtyId);
       return RedirectToAction("Index");
     }
 
@@ -36,6 +37,7 @@ namespace HairSalon.Controllers
       Stylist searchedStylist = Stylist.Find(id);
       model["stylist"] = searchedStylist;
       model["clients"] = searchedStylist.GetAllClients();
+      model["specialties"] = searchedStylist.GetAllStylistSpecialties();
       return View(model);
     }
 

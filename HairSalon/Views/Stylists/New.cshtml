@@ -1,3 +1,5 @@
+@using HairSalon.Models;
+
 <h1>New stylist</h1>
 <form action="/stylists" method="post">
   <label for='name'>Name</label>
@@ -10,5 +12,14 @@
   <input id='schedule' name='schedule' type='text' required>
   <label for='haircutStyles'>Haircut styles</label>
   <input id='haircutStyles' name='haircutStyles' type='text' required>
+
+  <label for="specialtyId">Specialty</label>
+  <select id="specialtyId" name="specialtyId">
+      @foreach(Specialty specialty in Model)
+      {
+          <option value="@specialty.GetId()">@specialty.GetDescription()</option>
+      }
+  </select>
+
   <button type="submit">Submit</button>
 </form>
