@@ -11,14 +11,25 @@ _An MVC web application for a hair salon that allows to manage stylists and thei
 _The program uses the following specifications:_
 
 * The program shows a list of all stylists.
-* The program allows to select a stylist to see their details.
+  Example:
+* The program allows to select a stylist, see their details, and see a list of all clients that belong to that stylist.
 * The program shows a list of all clients that belong to that stylist.
 * The program allows to edit stylist's details.
 * The program allows to add new stylists to the system.
-* The program allows to add new clients to a specific stylist.
+* The program allows to add new clients to a specific stylist. A client can't be added if no stylists have been added.
 * The program allows to edit client's details.
 * The program allows to delete a client.
+* The program allows to delete all clients.
 * The program allows to delete a selected stylist with all their clients.
+* The program allows to delete all stylists.
+* The program allows to view a selected client.
+* The program allows to view all clients.
+* The program allows to add a specialty.
+* The program allows to view all specialties.
+* The program allows to add an existing specialty to an existing stylist.
+* The program allows to add an existing stylist to an existing specialty.
+* The program allows to view all stylists with a selected specialty.
+* The program allows to view all specialties for a selected stylist on his detail page.
 
 ## Setup/Installation Requirements
 
