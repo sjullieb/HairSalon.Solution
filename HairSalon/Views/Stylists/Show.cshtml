@@ -1,53 +1,62 @@
 @using HairSalon.Models;
-
-<h1>Stylist @Model["stylist"].GetName()</h1>
-
-<p>Email: @Model["stylist"].GetEmail()</p>
-<p>Phone number: @Model["stylist"].GetPhoneNumber()</p>
-<p>Schedule: @Model["stylist"].GetSchedule()</p>
-<p>Haircut styles: @Model["stylist"].GetHaircutStyles()</p>
-
-@if(Model["clients"].Count == 0)
-{
-  <p>No client for this stylist.</p>
+@{
+  Layout = "_Layout";
 }
-@if(Model["clients"].Count != 0)
-{
-  <p>Clients:</p>
-  <ul>
-  @foreach(Client client in Model["clients"])
+<div class="container center">
+  <h1><img class="small" src="~/img/stylists.png" alt="stylist logo"> Stylist : @Model["stylist"].GetName()</h1>
+
+  <p>Email: <strong>@Model["stylist"].GetEmail()</strong></p>
+  <p>Phone number: <strong>@Model["stylist"].GetPhoneNumber()</strong></p>
+  <p>Schedule: <strong>@Model["stylist"].GetSchedule()</strong></p>
+  <p>Haircut styles: <strong>@Model["stylist"].GetHaircutStyles()</strong></p>
+
+  @if(Model["specialties"].Count == 0)
   {
-    <li><a href="/stylists/@Model["stylist"].GetId()/clients/@client.GetId()">@client.GetName()</a></li>
+    <p>No specialties for this stylist.</p>
   }
-  </ul>
-}
-
-@if(Model["specialties"].Count == 0)
-{
-  <p>No specialties for this stylist.</p>
-}
-@if(Model["specialties"].Count != 0)
-{
-  <p>Specialties:</p>
-  <ul>
-  @foreach(Specialty specialty in Model["specialties"])
+  @if(Model["specialties"].Count != 0)
   {
-    <li>@specialty.GetDescription()</li>
+    <p><strong>Specialties:</strong></p>
+    @foreach(Specialty specialty in Model["specialties"])
+    {
+      <p>@specialty.GetDescription()</p>
+    }
   }
-  </ul>
-}
 
-<form action="/stylists/@Model["stylist"].GetId()/edit">
-  <button>Edit</button>
-</form>
+  <br>
+  @if(Model["clients"].Count == 0)
+  {
+    <p>No client for this stylist.</p>
+  }
+  @if(Model["clients"].Count != 0)
+  {
+    <p>Clients:</p>
+    <ul>
+    @foreach(Client client in Model["clients"])
+    {
+      <li><a href="/stylists/@Model["stylist"].GetId()/clients/@client.GetId()">@client.GetName()</a></li>
+    }
+    </ul>
+  }
 
-<form action='/stylists/@Model["stylist"].GetId()/delete' method="post">
-  <button type='submit'>Delete</button>
-</form>
-
-<form action="/stylists/@Model["stylist"].GetId()/clients/new">
-  <button>Add new client</button>
-</form>
-
-<p><a href="/stylists">Go back to Stylists list</a></p>
-<p><a href="/">Go back to home page</a></p>
+  <br>
+  <form action="/stylists/@Model["stylist"].GetId()/edit">
+    <button>Edit</button>
+  </form>
+  <br>
+  <form action='/stylists/@Model["stylist"].GetId()/delete' method="post">
+    <button type='submit'>Delete</button>
+  </form>
+  <br>
+  <form action="/stylists/@Model["stylist"].GetId()/clients/new">
+    <button>Add new client</button>
+  </form>
+  <br>
+</div>
+<div class="footer center">
+  <div class="container">
+    <br>
+    <p><a href="/stylists">Go back to Stylists list</a></p>
+    <p><a href="/">Go back to home page</a></p>
+  </div>
+</div>

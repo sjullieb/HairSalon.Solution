@@ -1,21 +1,37 @@
 @using HairSalon.Models;
-
-<h1>All stylists</h1>
-@if(Model.Count==0)
-{
-  <p>No stylists available</p>
+@{
+  Layout = "_Layout";
 }
-@if(Model.Count!=0)
-{
-  @foreach(Stylist stylist in Model)
+<div class="container center">
+  <hr>
+  <h1><img class="small" src="~/img/stylists.png" alt="stylist logo"> Our stylists</h1>
+  @if(Model.Count==0)
   {
-    <p><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a></p>
+    <p>No stylists available</p>
   }
-}
+  @if(Model.Count!=0)
+  {
+    @foreach(Stylist stylist in Model)
+    {
+      <p><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a></p>
+    }
+  }
 
-<form action='/stylists/delete' method="post">
-  <button type='submit'>Delete all</button>
-</form>
+  <br>
+  <form action='/stylists/delete' method="post">
+    <button type='submit'>Delete all</button>
+  </form>
 
-<p><a href="/stylists/new">Add new stylist</a></p>
-<p><a href="/">Go back to home page</a></p>
+  <br>
+  <form action="/stylists/new">
+    <button>Add new stylist</button>
+  </form>
+  <hr>
+
+</div>
+<div class="footer center">
+  <div class="container">
+    <br>
+    <p><a href="/">Go back to home page</a></p>
+  </div>
+</div>

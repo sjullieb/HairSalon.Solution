@@ -1,30 +1,41 @@
 @using HairSalon.Models;
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  <h1><img class="small" src="~/img/stylists.png" alt="stylist logo"> Edit Stylist</h1>
+  <form action="/stylists/@Model["stylist"].GetId()" method="post">
+    <div class="form-group">
+      <label for='name'>Name</label>
+      <input id='name' name='name' class="form-control" type='text' value=@Model["stylist"].GetName()>
+      <label for='email'>Email</label>
+      <input id='email' name='email' class="form-control" type='text' value=@Model["stylist"].GetEmail()>
+      <label for='phoneNumber'>Phone number</label>
+      <input id='phoneNumber' name='phoneNumber' class="form-control" type='text' maxlength='15' value=@Model["stylist"].GetPhoneNumber()>
+      <label for='schedule'>Schedule</label>
+      <input id='schedule' name='schedule' class="form-control" type='text' value=@Model["stylist"].GetSchedule()>
+      <label for='haircutStyles'>Haircut styles</label>
+      <input id='haircutStyles' name='haircutStyles' class="form-control" type='text' value=@Model["stylist"].GetHaircutStyles()>
+    </div>
+    <button type="submit">Save</button>
+  </form>
 
-<h1>Edit Stylist</h1>
-<form action="/stylists/@Model["stylist"].GetId()" method="post">
-  <label for='name'>Name</label>
-  <input id='name' name='name' type='text' value=@Model["stylist"].GetName()>
-  <label for='email'>Email</label>
-  <input id='email' name='email' type='text' value=@Model["stylist"].GetEmail()>
-  <label for='phoneNumber'>Phone number</label>
-  <input id='phoneNumber' name='phoneNumber' type='text' maxlength='15' value=@Model["stylist"].GetPhoneNumber()>
-  <label for='schedule'>Schedule</label>
-  <input id='schedule' name='schedule' type='text' value=@Model["stylist"].GetSchedule()>
-  <label for='haircutStyles'>Haircut styles</label>
-  <input id='haircutStyles' name='haircutStyles' type='text' value=@Model["stylist"].GetHaircutStyles()>
-  <button type="submit">Save</button>
-</form>
+  <form action="/stylists/@Model["stylist"].GetId()/add_specialty/" method="post">
+    <div class="form-group">
+      <label for="specialtytId">Add this specialty to a stylist</label>
+      <select id="specialtyId" name="specialtyId" class="form-control">
+          @foreach(Specialty specialty in Model["potential_specialties"])
+          {
+              <option value="@specialty.GetId()">@specialty.GetDescription()</option>
+          }
+      </select>
+    </div>
+    <button>Add</button>
+  </form>
 
-<form action="/stylists/@Model["stylist"].GetId()/add_specialty/" method="post">
-  <label for="specialtytId">Add this specialty to a stylist</label>
-  <select id="specialtyId" name="specialtyId">
-      @foreach(Specialty specialty in Model["potential_specialties"])
-      {
-          <option value="@specialty.GetId()">@specialty.GetDescription()</option>
-      }
-  </select>
-  <button>Add</button>
-</form>
-
-<p><a href='/stylists'>Go back to Stylists list</a></p>
-<p><a href="/">Go back to home page</a></p>
+  <hr>
+  <div class="footer center"
+    <p><a href='/stylists'>Go back to Stylists list</a></p>
+    <p><a href="/">Go back to home page</a></p>
+  </div>
+</div>

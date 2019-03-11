@@ -1,9 +1,23 @@
-<h1>New specialty</h1>
-<form action="/specialties" method="post">
-  <label for='description'>Description</label>
-  <input id='descripotion' name='description' type='text' required>
-  <button type="submit">Add</button>
-</form>
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  <h1 class="center"><img class="small" src="~/img/specialty.jpg" alt="specialty logo"> New specialty</h1>
+  <form action="/specialties" method="post">
+    <div class="form-group">
+      <label for='description'>Description</label>
+      <input id='descripotion' name='description' class="form-control" type='text' required>
+    </div>
+    <div class="center"><button type="submit">Add</button></div>
+  </form>
 
-<p><a href="/specialties">Go back to Specialties list</a></p>
-<p><a href="/">Go back to home page</a></p>
+  <hr>
+</div>
+
+<div class="footer center">
+  <div class="container">
+    <br>
+    <p><a href="/specialties">Go back to Specialties list</a></p>
+    <p><a href="/">Go back to home page</a></p>
+  </div>
+</div>

@@ -1,17 +1,32 @@
 @using HairSalon.Models;
+@{
+  Layout = "_Layout";
+}
+<div class="container center">
+  <hr>
+  <h1><img class="small" src="~/img/clients.png" alt="client logo"> Client : @Model["client"].GetName()</h1>
+  <h2>Stylist @Model["stylist"].GetName()</h2>
 
-<h1>Client @Model["client"].GetName()</h1>
-<h2>Stylist @Model["stylist"].GetName()</h2>
+  <p>Email: @Model["client"].GetEmail()<p>
+  <p>Phone number: @Model["client"].GetPhoneNumber()<p>
 
-<p>Email: @Model["client"].GetEmail()<p>
-<p>Phone number: @Model["client"].GetPhoneNumber()<p>
+  <br>
+  <form action='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit'>
+    <button type="submit">Edit</button>
+  </form>
 
-<form action='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit'>
-  <button type="submit">Edit</button>
-</form>
+  <br>
+  <form action='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/delete' method="post">
+    <button type="submit">Delete</button>
+  </form>
 
-<form action='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/delete' method="post">
-  <button type="submit">Delete</button>
-</form>
-<p><a href='/stylists/@Model["stylist"].GetId()/'>Back to @Model["stylist"].GetName()'s clients</a></p>
-<p><a href="/">Go back to home page</a></p>
+  <hr>
+</div>
+
+<div class="footer center">
+  <div class="container">
+    <br>
+    <p><a href='/stylists/@Model["stylist"].GetId()/'>Back to @Model["stylist"].GetName()'s clients</a></p>
+    <p><a href="/">Go back to home page</a></p>
+  </div>
+</div>

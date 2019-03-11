@@ -1,16 +1,32 @@
 @using HairSalon.Models
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  <hr>
+  <h1 class="center"><img class="small" src="~/img/clients.png" alt="client logo"> New Client for @Model.GetName()</h1>
+  <form action="/stylists/@Model.GetId()/clients" method="post">
+    <div class="form-group">
+      <input id="stylist_id" name="stylist_id" class="form-control" type="hidden" value="@Model.GetId()">
+      <label for="name">Name</label>
+      <input id="name" name="name" class="form-control" type="text" required>
+      <label for="email">Email</label>
+      <input id="email" name="email" class="form-control" type="text" required>
+      <label for='phoneNumber'>Phone number</label>
+      <input id='phoneNumber' name='phoneNumber' class="form-control" type='text' maxlength='15' required>
+    </div>
+    <div class="center">
+      <button type="submit">Add</button>
+    </div>
+  </form>
 
-<h1>New Client for @Model.GetName()</h1>
-<form action="/stylists/@Model.GetId()/clients" method="post">
-  <input id="stylist_id" name="stylist_id" type="hidden" value="@Model.GetId()">
-  <label for="name">Name</label>
-  <input id="name" name="name" type="text" required>
-  <label for="email">Email</label>
-  <input id="email" name="email" type="text" required>
-  <label for='phoneNumber'>Phone number</label>
-  <input id='phoneNumber' name='phoneNumber' type='text' maxlength='15' required>
-  <button type="submit">Add</button>
-</form>
+  <hr>
+</div>
 
-<a href="/stylists/@Model.GetId()">Back to @Model.GetName()</a>
-<p><a href="/">Go back to home page</a></p>
+<div class="footer center">
+  <div class="container">
+    <br>
+    <p><a href="/stylists/@Model.GetId()">Back to @Model.GetName()</a></p>
+    <p><a href="/">Go back to home page</a></p>
+  </div>
+</div>

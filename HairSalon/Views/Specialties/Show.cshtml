@@ -1,28 +1,39 @@
 @using HairSalon.Models;
-
-<h1>@Model["specialty"].GetDescription()</h1>
-
-@if(Model["stylists"].Count == 0)
-{
-  <p>No stylists for this specialty.</p>
+@{
+  Layout = "_Layout";
 }
-@if(Model["stylists"].Count != 0)
-{
-  <ul>
-  @foreach(Stylist stylist in Model["stylists"])
+  <div class="container center">
+  <h1><img class="small" src="~/img/specialty.jpg" alt="specialty logo"> Specialty: @Model["specialty"].GetDescription()</h1>
+
+  @if(Model["stylists"].Count == 0)
   {
-    <li><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a></li>
+    <p>No stylists for this specialty.</p>
   }
-  </ul>
-}
+  @if(Model["stylists"].Count != 0)
+  {
+    @foreach(Stylist stylist in Model["stylists"])
+    {
+      <p><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a></p>
+    }
+  }
 
-<form action="/specialties/@Model["specialty"].GetId()/edit">
-  <button>Edit</button>
-</form>
+  <br>
+  <form action="/specialties/@Model["specialty"].GetId()/edit">
+    <button>Edit</button>
+  </form>
 
-<form action='/specialties/@Model["specialty"].GetId()/delete' method="post">
-  <button type='submit'>Delete</button>
-</form>
+  <br>
+  <form action='/specialties/@Model["specialty"].GetId()/delete' method="post">
+    <button type='submit'>Delete</button>
+  </form>
 
-<p><a href="/specialties">Go back to Specialties list</a></p>
-<p><a href="/">Go back to home page</a></p>
+  <hr>
+</div>
+
+<div class="footer center">
+  <div class="container">
+    <br>
+    <p><a href="/specialties">Go back to Specialties list</a></p>
+    <p><a href="/">Go back to home page</a></p>
+  </div>
+</div>
