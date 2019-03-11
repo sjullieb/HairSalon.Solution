@@ -11,7 +11,6 @@ _An MVC web application for a hair salon that allows to manage stylists and thei
 _The program uses the following specifications:_
 
 * The program shows a list of all stylists.
-  Example:
 * The program allows to select a stylist, see their details, and see a list of all clients that belong to that stylist.
 * The program shows a list of all clients that belong to that stylist.
 * The program allows to edit stylist's details.
